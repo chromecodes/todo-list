@@ -1,0 +1,31 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css);
+
+:root {
+  --royal-blue-dark: #1a2a68;
+  --green-blue-crayola: #1789c9;
+  --apple-green: #94c200;
+  --avocado: #667f00;
+  --deep-saffron: #ef9740;
+  --jet: #3a3532;
+  --raisin-black: #292524;
+  --cardinal: #c12e3e;
+  --claret: #6a1727;
+
+  --primary-bg-color: #000000;
+  --primary-color: #ffffff;
+  --primary-liner-gradient-accent: linear-gradient(
+    45deg,
+    #94c200 0%,
+    #4eff10 35%,
+    #00ff7f 85%
+  );
+}
+body {
+  background-color: white;
+  color: black;
+}
+.header {
+  height: 30px;
+  background: green;
+  color: var(--green-blue-crayola);
+}
