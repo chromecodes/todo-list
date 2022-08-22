@@ -29,3 +29,11 @@ body {
   background: green;
   color: var(--green-blue-crayola);
 }
+.main {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-areas: "nav display";
+}
+.nav {
+  grid-area: nav;
+}
