@@ -1,74 +1,103 @@
 export const taskDisplay = ()=>{
 
     const display = document.getElementById("display");
-
+        
         const content = document.createElement('div');
-        content.setAttribute("class","content");
-            
-            const taskTitle = document.createElement('div');
-            taskTitle.setAttribute("class","task-title");
-            taskTitle.textContent = "Task's";
+        content.setAttribute("class","content");            
 
+            const contentHeader = document.createElement('div');
+            contentHeader.setAttribute("class","content-header");
 
-        content.appendChild(taskTitle);
+                const taskTitle = document.createElement('div');
+                taskTitle.setAttribute("class","task-title");
+                taskTitle.textContent = "Task's";
 
-            const taskBtn = document.createElement('button');
-            taskBtn.setAttribute("class","task-btn");
+            contentHeader.appendChild(taskTitle);
 
-        content.appendChild(taskBtn);
-            
+                const taskBtn = document.createElement('button');
+                taskBtn.setAttribute("class","task-btn");
+
+            contentHeader.appendChild(taskBtn);
+
+        content.appendChild(contentHeader);    
+
+            let tempHr = document.createElement("div");
+            tempHr.setAttribute("class","title-span");
+
+        content.appendChild(tempHr);    
+
             const taskInputCnt = document.createElement('div');
             taskInputCnt.setAttribute("class","taskinputcnt");
+                
+                const taskInputCnt0 = document.createElement('div');
+                taskInputCnt0.setAttribute("class","taskinputcnt0");
 
-                const taskInput = document.createElement('input');
-                taskInput.setAttribute("type","text");
-                taskInput.setAttribute("id","task");
-                taskInput.setAttribute("placeholder","Task");
+                    const taskInputCnt1 = document.createElement('div');
+                    taskInputCnt1.setAttribute("class","taskinputcnt1");
 
-            taskInputCnt.appendChild(taskInput);
+                        const taskInput = document.createElement('input');
+                        taskInput.setAttribute("type","text");
+                        taskInput.setAttribute("id","task");
+                        taskInput.setAttribute("placeholder","Task");
 
-                const dateInput = document.createElement('input');
-                dateInput.setAttribute("type","date");
-                dateInput.setAttribute("id","date");
+                    taskInputCnt1.appendChild(taskInput);
 
-            taskInputCnt.appendChild(dateInput);
+                        const dateInput = document.createElement('input');
+                        dateInput.setAttribute("type","date");
+                        dateInput.setAttribute("id","date");
 
-                const priorityInput = document.createElement('select');
-                priorityInput.setAttribute("id","priority");
+                    taskInputCnt1.appendChild(dateInput);
 
-                    const priorityInputOption1 = document.createElement('option');
-                    priorityInputOption1.setAttribute("value","low");
-                    priorityInputOption1.textContent = "Not at all important";
+                        const priorityInput = document.createElement('select');
+                        priorityInput.setAttribute("id","priority");
 
-                priorityInput.appendChild(priorityInputOption1);
+                            const priorityInputOption1 = document.createElement('option');
+                            priorityInputOption1.setAttribute("value","low");
+                            priorityInputOption1.textContent = "Not at all important";
 
-                    const priorityInputOption2 = document.createElement('option');
-                    priorityInputOption2.setAttribute("value","low");
-                    priorityInputOption2.textContent = "It's some important ";
+                        priorityInput.appendChild(priorityInputOption1);
 
-                priorityInput.appendChild(priorityInputOption2);
+                            const priorityInputOption2 = document.createElement('option');
+                            priorityInputOption2.setAttribute("value","low");
+                            priorityInputOption2.textContent = "It's some important ";
 
-                    const priorityInputOption3 = document.createElement('option');
-                    priorityInputOption3.setAttribute("value","low");
-                    priorityInputOption3.textContent = "It's very important";
+                        priorityInput.appendChild(priorityInputOption2);
 
-                priorityInput.appendChild(priorityInputOption3);
+                            const priorityInputOption3 = document.createElement('option');
+                            priorityInputOption3.setAttribute("value","low");
+                            priorityInputOption3.textContent = "It's very important";
 
-            taskInputCnt.appendChild(priorityInput);
+                        priorityInput.appendChild(priorityInputOption3);
 
-                const taskAddBtn =  document.createElement('button');
-                taskAddBtn.setAttribute("class","add-btn");
-                taskAddBtn.textContent = "Add";
+                    taskInputCnt1.appendChild(priorityInput);
 
-            taskInputCnt.appendChild(taskAddBtn);
+                taskInputCnt0.appendChild(taskInputCnt1);
 
-                const taskCloseBtn =  document.createElement('button');
-                taskCloseBtn.setAttribute("class","cancel-btn");
-                taskCloseBtn.textContent = "Cancel";
+                    const taskInputCnt2 = document.createElement('div');
+                    taskInputCnt2.setAttribute("class","taskinputcnt2");
+                    
 
-            taskInputCnt.appendChild(taskCloseBtn);
+                        const taskAddBtn =  document.createElement('button');
+                        taskAddBtn.setAttribute("class","add-btn");
+                        taskAddBtn.textContent = "Add";
+
+                    taskInputCnt2.appendChild(taskAddBtn);
+
+                        const taskCloseBtn =  document.createElement('button');
+                        taskCloseBtn.setAttribute("class","cancel-btn");
+                        taskCloseBtn.textContent = "Cancel";
+
+                    taskInputCnt2.appendChild(taskCloseBtn);
+                    
+                taskInputCnt0.appendChild(taskInputCnt2);
+
+            taskInputCnt.appendChild(taskInputCnt0);
 
         content.appendChild(taskInputCnt);
+            const taskListCnt = document.createElement("div");
+                
+            taskListCnt.setAttribute("class","task-list-cnt");
+        content.appendChild(taskListCnt);    
 
     display.appendChild(content);
 }
