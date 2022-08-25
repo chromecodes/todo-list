@@ -58,13 +58,13 @@ export const taskDisplay = ()=>{
                         priorityInput.appendChild(priorityInputOption1);
 
                             const priorityInputOption2 = document.createElement('option');
-                            priorityInputOption2.setAttribute("value","low");
+                            priorityInputOption2.setAttribute("value","mild");
                             priorityInputOption2.textContent = "It's some important ";
 
                         priorityInput.appendChild(priorityInputOption2);
 
                             const priorityInputOption3 = document.createElement('option');
-                            priorityInputOption3.setAttribute("value","low");
+                            priorityInputOption3.setAttribute("value","high");
                             priorityInputOption3.textContent = "It's very important";
 
                         priorityInput.appendChild(priorityInputOption3);
