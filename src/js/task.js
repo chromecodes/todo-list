@@ -23,51 +23,58 @@ export const todo = (() =>{
                     taskCheck.setAttribute( 'type','checkbox');
                     taskCheck.setAttribute( 'id',`task-check-${i}`);
                 taskElementCnt.appendChild(taskCheck);    
-                
-                    const taskElementCnt1 = document.createElement('div');
-                    taskElementCnt1.setAttribute( 'class','task-cnt1');
-                
-                        const taskCheckLbl = document.createElement('label');
-                        taskCheckLbl.setAttribute( 'class','task-check-lbl');
-                        taskCheckLbl.setAttribute( 'for',`task-check-${i}`);
 
-                    taskElementCnt1.appendChild(taskCheckLbl);    
+                    const taskElementCnt0 = document.createElement('div');
+                        taskElementCnt0.setAttribute( 'class','task-cnt0');
+                    
+                        const taskElementCnt1 = document.createElement('div');
+                        taskElementCnt1.setAttribute( 'class','task-cnt1');
+                    
+                            const taskCheckLbl = document.createElement('label');
+                            taskCheckLbl.setAttribute( 'class','task-check-lbl');
+                            taskCheckLbl.setAttribute( 'for',`task-check-${i}`);
 
-                        const taskContent = document.createElement('span');
-                        taskContent.setAttribute( 'class','task-content');
-                        taskContent.textContent = todos[i].task;
+                        taskElementCnt1.appendChild(taskCheckLbl);    
 
-                    taskElementCnt1.appendChild(taskContent);    
+                            const taskContent = document.createElement('span');
+                            taskContent.setAttribute( 'class','task-content');
+                            taskContent.textContent = todos[i].task;
 
-                taskElementCnt.appendChild(taskElementCnt1);    
+                        taskElementCnt1.appendChild(taskContent);    
 
-                    const taskElementCnt2 = document.createElement('div');
-                    taskElementCnt2.setAttribute( 'class','task-cnt2');
+                    taskElementCnt0.appendChild(taskElementCnt1);    
 
-                        const taskDate = document.createElement('span');
-                        taskDate.setAttribute( 'class','task-date');
-                        taskDate.textContent = todos[i].date;
+                        const taskElementCnt2 = document.createElement('div');
+                        taskElementCnt2.setAttribute( 'class','task-cnt2');
 
-                    taskElementCnt2.appendChild(taskDate);    
+                            const taskDate = document.createElement('span');
+                            taskDate.setAttribute( 'class','task-date');
+                            taskDate.textContent = todos[i].date;
 
-                        const taskEdit = document.createElement('button');
-                        taskEdit.setAttribute( 'class','task-edit');
-                        taskEdit.setAttribute( 'index',`${i}`);
-                    taskElementCnt2.appendChild(taskEdit);    
+                        taskElementCnt2.appendChild(taskDate);    
 
-                        const taskDelete = document.createElement('button');
-                        taskDelete.setAttribute( 'class','task-delete');
-                        taskDelete.setAttribute( 'index',`${i}`);
+                            const taskEdit = document.createElement('button');
+                            taskEdit.setAttribute( 'class','task-edit');
+                            taskEdit.setAttribute( 'index',`${i}`);
+                        taskElementCnt2.appendChild(taskEdit);    
 
-                    taskElementCnt2.appendChild(taskDelete);    
+                            const taskDelete = document.createElement('button');
+                            taskDelete.setAttribute( 'class','task-delete');
+                            taskDelete.setAttribute( 'index',`${i}`);
 
-                taskElementCnt.appendChild(taskElementCnt2);    
+                        taskElementCnt2.appendChild(taskDelete);    
 
-                let tempHr = document.createElement("div");
-                tempHr.setAttribute("class","task-span");
+                    taskElementCnt0.appendChild(taskElementCnt2);   
+                     
+                taskElementCnt.appendChild(taskElementCnt0);    
+
+
+                    let tempHr = document.createElement("div");
+                    tempHr.setAttribute("class","task-span");
+
+                taskElementCnt.appendChild(tempHr);    
 
             temp.appendChild(taskElementCnt);    
-            temp.appendChild(tempHr);    
 
         
         }
