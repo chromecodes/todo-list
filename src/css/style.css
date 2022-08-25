@@ -21,6 +21,14 @@
   --primary-blue-accent: #a4d7f4;
   --secondary-blue-accent: #1789c9;
 
+  --primary-lggreen-accent: #b3ffd9;
+  --secondary-lggreen-accent: #00ff7f;
+
+  --primary-drgreen-accent: #94c200;
+  --secondary-drgreen-accent: #94c200;
+  --primary-saffron-accent: #ffccb3;
+  --secondary-saffron-accent: #ff9966;
+
   --primary-color: #ffffff;
 
   --primary-liner-gradient-accent: linear-gradient(
@@ -134,10 +142,6 @@ button {
   cursor: pointer;
   border-radius: 50%;
 }
-.task-btn:hover {
-  background: var(--avocado);
-}
-
 .task-btn::before {
   display: inline-block;
   text-rendering: auto;
@@ -145,20 +149,23 @@ button {
   font: var(--fa-font-solid);
   content: "\2b";
   margin-top: 2px;
-  color: #00ff7f;
+  color: var(--primary-lggreen-accent);
+}
+.task-btn:hover::before {
+  color: var(--secondary-lggreen-accent);
 }
 .title-span {
   content: " ";
   width: 98.5%;
   height: 2px;
-  margin: 4px 4px 0;
+  margin: 4px;
   border-radius: 10px;
   background: var(--terinary-bg-color);
 }
 .taskinputcnt {
   border-bottom: 2px solid var(--terinary-bg-color);
   border-radius: 0 0 5px 5px;
-  padding: 10px 25px 10px 25px;
+  padding: 6px 25px 10px 25px;
   display: none;
   margin-bottom: 3px;
 }
@@ -181,6 +188,8 @@ button {
 .taskinputcnt2 {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 3px;
 }
 #task,
 #date,
@@ -188,7 +197,7 @@ button {
   padding: 2px 4px;
   outline: none;
   color: var(--primary-color);
-  border: 1px solid var(--primary-blue-accent);
+  border: none;
   border-radius: 5px;
   background: var(--secondary-bg-color);
 }
@@ -203,6 +212,26 @@ button {
 #priority {
   grid-area: priority;
 }
+.cancel-btn,
+.add-btn {
+  padding: 2px 4px;
+
+  border: none;
+  border-radius: 5px;
+}
+.add-btn {
+  background-color: var(--primary-lggreen-accent);
+}
+.cancel-btn {
+  background-color: var(--primary-saffron-accent);
+}
+.add-btn:hover {
+  background-color: var(--secondary-lggreen-accent);
+}
+.cancel-btn:hover {
+  background-color: var(--secondary-saffron-accent);
+}
+
 .task-cnt0 {
   padding: 5px 20px 5px;
 
@@ -266,6 +295,58 @@ button {
   border-radius: 10px;
   background: var(--terinary-bg-color);
 }
+.taskupdatecnt {
+  display: none;
+}
+.taskupdatecnt0 {
+  padding: 2px 30px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.taskupdatecnt1,
+.taskupdatecnt2 {
+  display: flex;
+  gap: 4px;
+}
+#task-update,
+#date-update,
+#priority-update {
+  width: 125px;
+  padding: 2px 4px;
+  outline: none;
+  color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  background: var(--secondary-bg-color);
+}
+.cancelupdate-btn,
+.update-btn {
+  padding: 2px 4px;
+  border: none;
+  border-radius: 5px;
+}
+.update-btn {
+  background-color: var(--primary-blue-accent);
+}
+.cancelupdate-btn {
+  background-color: var(--primary-saffron-accent);
+}
+.update-btn:hover {
+  background-color: var(--secondary-blue-accent);
+}
+.cancelupdate-btn:hover {
+  background-color: var(--secondary-saffron-accent);
+}
+/* #task {
+  grid-area: task;
+  padding: 4px 8px;
+}
+#date {
+  grid-area: date;
+}
+#priority {
+  grid-area: priority;
+} */
 /***   FOOTER SECTION   ***/
 
 .footer {
@@ -302,4 +383,8 @@ button {
 
 .odin:hover {
   transform: scale(1.2);
+}
+
+.visible {
+  display: block;
 }
