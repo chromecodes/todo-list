@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&family=Quicksand&family=Saira:ital,wght@1,300;1,400&display=swap);
 
 :root {
-  --royal-blue-dark: #1a2a68;
+  /* --royal-blue-dark: #1a2a68;
   --green-blue-crayola: #1789c9;
   --apple-green: #94c200;
   --avocado: #667f00;
@@ -10,32 +10,44 @@
   --jet: #3a3532;
   --raisin-black: #292524;
   --cardinal: #c12e3e;
-  --claret: #6a1727;
+  --claret: #6a1727; */
 
-  --primary-bg-color: #000000;
+  --primary-bg-color: #1a1a1a;
+  --secondary-bg-color: #333333;
+  --terinary-bg-color: #4d4d4d;
+
+  --primary-red-accent: #e2838e;
+  --secondary-red-accent: #c12e3e;
+  --primary-blue-accent: #a4d7f4;
+  --secondary-blue-accent: #1789c9;
+
   --primary-color: #ffffff;
+
   --primary-liner-gradient-accent: linear-gradient(
     45deg,
     #94c200 0%,
     #4eff10 35%,
     #00ff7f 85%
   );
-  --secondary-liner-gradient-accent: linear-gradient(
+  /* --secondary-liner-gradient-accent: linear-gradient( 
     22deg,
     #94c200 0%,
     #1a2a68 35%,
     #1789c9 85%
-  );
+  ); */
 }
 body {
   font-family: "Nunito", sans-serif;
-  background-color: whitesmoke;
-  color: black;
+  background-color: var(--primary-bg-color);
+  color: white;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+button {
+  cursor: pointer;
 }
 
 /***   HEADER SECTION   ***/
@@ -44,8 +56,7 @@ body {
   font-size: 24px;
   font-weight: 600;
   height: 45px;
-  background: gray;
-  color: white;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   padding-left: 100px;
@@ -57,7 +68,7 @@ body {
 .main {
   flex: 1;
   height: 100%;
-  background-color: var(--raisin-black);
+  background-color: var(--primary-bg-color);
   height: 100%;
   display: grid;
   grid-template-columns: 20% 80%;
@@ -68,7 +79,7 @@ body {
 
 .nav {
   grid-area: nav;
-  background-color: var(--jet);
+  background-color: var(--secondary-bg-color);
   padding: 30px;
 }
 
@@ -84,7 +95,6 @@ body {
 }
 .all {
   grid-area: all;
-  /* background: var(--secondary-liner-gradient-accent); */
 }
 .today {
   grid-area: today;
@@ -106,7 +116,7 @@ body {
 /***   DISPLAY SECTION   ***/
 .display {
   padding: 30px;
-  color: white;
+  color: var(--primary-color);
 }
 .content-header {
   display: flex;
@@ -141,24 +151,21 @@ body {
   content: " ";
   width: 98.5%;
   height: 2px;
-  margin: 4px;
+  margin: 4px 4px 0;
   border-radius: 10px;
-  background: var(--jet);
+  background: var(--terinary-bg-color);
 }
 .taskinputcnt {
-  margin-top: -10px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid var(--terinary-bg-color);
   border-radius: 0 0 5px 5px;
-  padding: 15px 25px 10px 25px;
+  padding: 10px 25px 10px 25px;
   display: none;
+  margin-bottom: 3px;
 }
 .visible {
   display: block;
 }
 .taskinputcnt0 {
-  margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
@@ -169,13 +176,26 @@ body {
   grid-template-areas:
     "task task"
     "date priority";
+  grid-gap: 3px;
 }
 .taskinputcnt2 {
   display: flex;
   flex-direction: column;
 }
+#task,
+#date,
+#priority {
+  padding: 2px 4px;
+  outline: none;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-blue-accent);
+  border-radius: 5px;
+  background: var(--secondary-bg-color);
+}
+
 #task {
   grid-area: task;
+  padding: 4px 8px;
 }
 #date {
   grid-area: date;
@@ -183,10 +203,9 @@ body {
 #priority {
   grid-area: priority;
 }
-.task-list-cnt {
-}
-.task-cnt {
-  padding: 5px 20px 0;
+.task-cnt0 {
+  padding: 5px 20px 5px;
+
   display: flex;
   justify-content: space-between;
 }
@@ -200,8 +219,8 @@ body {
   font: var(--fa-font-solid);
   content: "\f1ce";
 }
-.task-check:checked + .task-cnt1,
-.task-check:checked ~ .task-cnt2 {
+.task-check:checked + .task-cnt0,
+.task-check:checked ~ .task-span {
   display: none;
 }
 .task-cnt1,
@@ -212,31 +231,40 @@ body {
 .task-edit,
 .task-delete {
   border: none;
+  cursor: pointer;
   background-color: transparent;
+  padding: 0;
 }
+
 .task-edit::before {
   display: inline-block;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   font: var(--fa-font-solid);
   content: "\f304";
-  color: white;
+  color: #a4d7f4;
 }
-.task-delete {
+.task-delete::before {
   display: inline-block;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   font: var(--fa-font-solid);
-  content: "\f304";
-  color: white;
+  content: "\58";
+  color: #e2838e;
+}
+.task-edit:hover::before {
+  color: #1789c9;
+}
+.task-delete:hover::before {
+  color: #c12e3e;
 }
 .task-span {
   content: " ";
-  width: 97.5%;
+  width: 96%;
   height: 1px;
-  margin: 4px;
+  margin: 4px 20px;
   border-radius: 10px;
-  background: var(--jet);
+  background: var(--terinary-bg-color);
 }
 /***   FOOTER SECTION   ***/
 
