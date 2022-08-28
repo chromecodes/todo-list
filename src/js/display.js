@@ -1,7 +1,39 @@
-export const taskDisplay = ()=>{
+
+export const projectTitleInput = () =>{
+    
+    const projectTitleInputCnt = document.querySelector('.project-input-cnt');
+
+        const projectTitleInputCnt0 = document.createElement('div');
+        projectTitleInputCnt0.setAttribute("class","projectsinputcnt0");
+                
+                const projectTitleInput = document.createElement('input');
+                projectTitleInput.setAttribute("type","text");
+                projectTitleInput.setAttribute("id","project-title");
+                projectTitleInput.setAttribute("placeholder","Project Title");
+
+            projectTitleInputCnt0.appendChild(projectTitleInput);
+            
+                const projectTitleAddBtn =  document.createElement('button');
+                projectTitleAddBtn.setAttribute("id","project-title-add");
+                projectTitleAddBtn.setAttribute("class","add-btn");
+                projectTitleAddBtn.textContent = "Add";
+
+            projectTitleInputCnt0.appendChild(projectTitleAddBtn);
+
+                const projectTitleCloseBtn =  document.createElement('button');
+                projectTitleCloseBtn.setAttribute("id","project-title-cancel");
+                projectTitleCloseBtn.setAttribute("class","cancel-btn");
+                projectTitleCloseBtn.textContent = "Cancel";
+
+            projectTitleInputCnt0.appendChild(projectTitleCloseBtn);
+                        
+    projectTitleInputCnt.appendChild(projectTitleInputCnt0);
+}
+
+export const taskDisplay = (val, i)=>{
 
     const display = document.getElementById("display");
-        
+
         const content = document.createElement('div');
         content.setAttribute("class","content");            
 
@@ -10,7 +42,11 @@ export const taskDisplay = ()=>{
 
                 const taskTitle = document.createElement('div');
                 taskTitle.setAttribute("class","task-title");
-                taskTitle.textContent = "Task's";
+                if(val.name === 'projects'){
+                    taskTitle.textContent = val.obj[i].title;                    
+                } else {
+                    taskTitle.textContent = val.name;
+                }
 
             contentHeader.appendChild(taskTitle);
 
@@ -32,8 +68,17 @@ export const taskDisplay = ()=>{
                 const taskInputCnt0 = document.createElement('div');
                 taskInputCnt0.setAttribute("class","taskinputcnt0");
 
+                
                     const taskInputCnt1 = document.createElement('div');
                     taskInputCnt1.setAttribute("class","taskinputcnt1");
+
+                        if(val.name === 'projects'){
+                            const titleEdit = document.createElement('input');
+                            titleEdit.setAttribute("type","text");
+                            titleEdit.setAttribute("id","title");
+                            titleEdit.value = val.obj[i].title;
+                        taskInputCnt1.appendChild(titleEdit);
+                        }
 
                         const taskInput = document.createElement('input');
                         taskInput.setAttribute("type","text");
@@ -75,7 +120,6 @@ export const taskDisplay = ()=>{
 
                     const taskInputCnt2 = document.createElement('div');
                     taskInputCnt2.setAttribute("class","taskinputcnt2");
-                    
 
                         const taskAddBtn =  document.createElement('button');
                         taskAddBtn.setAttribute("class","add-btn");
