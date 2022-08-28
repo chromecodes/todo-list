@@ -37,12 +37,6 @@
     #4eff10 35%,
     #00ff7f 85%
   );
-  /* --secondary-liner-gradient-accent: linear-gradient( 
-    22deg,
-    #94c200 0%,
-    #1a2a68 35%,
-    #1789c9 85%
-  ); */
 }
 body {
   font-family: "Nunito", sans-serif;
@@ -54,8 +48,21 @@ body {
   flex-direction: column;
   align-items: stretch;
 }
+
 button {
   cursor: pointer;
+}
+
+.controls button,
+.task-nav,
+.projects-nav,
+.project-title {
+  color: var(--primary-color);
+  background-color: var(--terinary-bg-color);
+  border-radius: 5px;
+  border: 1px solid var(--terinary-bg-color);
+  font-weight: 800;
+  transition: 0.08s ease-in;
 }
 
 /***   HEADER SECTION   ***/
@@ -89,17 +96,21 @@ button {
   grid-area: nav;
   background-color: var(--secondary-bg-color);
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .controls {
   display: grid;
+  grid-auto-rows: 30px;
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "all all"
     "today week"
     "important completed";
   gap: 2.5px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 .all {
   grid-area: all;
@@ -118,9 +129,119 @@ button {
 }
 
 .task-nav {
+  height: 35px;
+  font-size: 18px;
   width: 100%;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.task-nav::after {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  content: "\f105";
+  display: none;
 }
 
+.task-nav:hover::after {
+  display: inline-block;
+}
+
+.task-nav:active::after {
+  display: inline-block;
+  color: var(--primary-drgreen-accent);
+}
+
+.task-nav:active,
+.projects-nav:active,
+.project-title:active {
+  background-color: var(--secondary-bg-color);
+}
+.project-nav-cnt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.projects-nav {
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.projects-nav:hover > .projects-add-btn {
+  display: block;
+}
+.projects-list-btn {
+  color: inherit;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-weight: inherit;
+}
+.projects-add-btn {
+  color: inherit;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  display: none;
+}
+
+.projects-add-btn::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  content: "\2b";
+}
+.projects-add-btn:hover::before {
+  color: var(--secondary-lggreen-accent);
+}
+.project-input-cnt {
+  display: flex;
+  justify-content: center;
+}
+.projectsinputcnt0 {
+  width: 60%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-areas:
+    "projecttitle projecttitle"
+    "projectadd projectcancel";
+  align-items: center;
+  gap: 3px;
+}
+
+#project-title {
+  grid-area: projecttitle;
+  width: 95%;
+  padding: 2px 4px;
+  outline: none;
+  color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  background: var(--terinary-bg-color);
+}
+#project-title-add {
+  grid-area: projectadd;
+}
+#project-title-cancel {
+  grid-area: projectcancel;
+}
+.projects-title-cnt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+.project-title {
+  width: 90%;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 2px 5px;
+}
 /***   DISPLAY SECTION   ***/
 .display {
   padding: 30px;
@@ -181,6 +302,7 @@ button {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-areas:
+    "title title"
     "task task"
     "date priority";
   grid-gap: 3px;
@@ -188,12 +310,13 @@ button {
 .taskinputcnt2 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   gap: 3px;
 }
 #task,
 #date,
-#priority {
+#priority,
+#title {
   padding: 2px 4px;
   outline: none;
   color: var(--primary-color);
@@ -201,7 +324,10 @@ button {
   border-radius: 5px;
   background: var(--secondary-bg-color);
 }
-
+#title {
+  grid-area: title;
+  padding: 4px 8px;
+}
 #task {
   grid-area: task;
   padding: 4px 8px;
@@ -387,4 +513,7 @@ button {
 
 .visible {
   display: block;
+}
+.active {
+  display: inline-block;
 }
