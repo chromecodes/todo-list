@@ -25,3 +25,7 @@ console.log( object.objects[1].obj[0].value[1].task);
 // console.log( object.objects[1]);
 
 
+let date1 = new Date().toLocaleDateString()
+// date1 = date1.toLocaleDateString()
+console.log(date1);
+// .toLocalDateString()
