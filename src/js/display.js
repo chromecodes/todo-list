@@ -50,17 +50,20 @@ export const taskDisplay = (val, i)=>{
 
             contentHeader.appendChild(taskTitle);
 
+            if(val.name !== 'All-Tasks'){
                 const taskBtn = document.createElement('button');
                 taskBtn.setAttribute("class","task-btn");
 
             contentHeader.appendChild(taskBtn);
-
+            }
         content.appendChild(contentHeader);    
 
             let tempHr = document.createElement("div");
             tempHr.setAttribute("class","title-span");
 
         content.appendChild(tempHr);    
+
+
 
             const taskInputCnt = document.createElement('div');
             taskInputCnt.setAttribute("class","taskinputcnt");
@@ -90,6 +93,7 @@ export const taskDisplay = (val, i)=>{
                         const dateInput = document.createElement('input');
                         dateInput.setAttribute("type","date");
                         dateInput.setAttribute("id","date");
+                        dateInput.valueAsDate = new Date();
 
                     taskInputCnt1.appendChild(dateInput);
 
