@@ -1,11 +1,11 @@
 export const object = (() =>{
     const objects = [   
-        {name: "Task's", obj:[{date: "2022-08-24" , priority: "low", task : "ca"},{date: "2019-08-24" , priority: "high", task : "caaaaaaa"}]},
-                         {name: 'projects', obj:[{ title: 'GYM',value:[{date: "2022-08-24" , priority: "low", task : "ca"},{date: "2019-08-24" , priority: "high", task : "caaaaaaa"}]},{ title: 'Books to read',value:[]}]}
-                    ]
+        {name: "Tasks", obj:[{date: "2022-08-24" , priority: "low", task : "ca", completed : false},{date: "2019-08-24" , priority: "high", task : "caaaaaaa", completed : false}]},
+                         {name: 'projects', obj:[{ title: 'GYM',value:[{date: "2022-08-24" , priority: "low", task : "ca", completed : false},{date: "2019-08-24" , priority: "high", task : "caaaaaaa", completed : false}]},{ title: 'Books to read',value:[]}]},
+                         {name:'All-Tasks'},     ]
 
-    const createTodo = (task, date, priority) => {
-        return ({task, date, priority})
+    const createTodo = (task, date , priority, completed = false) => {
+        return ({task, date, priority, completed})
     };
 
     const makeTodo = (task, date, priority) => { 
@@ -21,8 +21,8 @@ export const object = (() =>{
     const addProjectTitle = (title)=>{
         objects[1].obj.push(createProject(title))
     }
-    const addProjectValue = (v, task, date, priority) =>{
-        objects[1].obj[v].value.push(createTodo(task, date, priority))
+    const addProjectValue = (v, task, date, priority, completed = false) =>{
+        objects[1].obj[v].value.push(createTodo(task, date, priority, completed))
     }
     const removeProjectValue = (v, i) =>{
         objects[1].obj[v].value.splice(i,1);
