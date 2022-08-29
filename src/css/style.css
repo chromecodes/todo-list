@@ -373,6 +373,7 @@ button {
   -webkit-font-smoothing: antialiased;
   font: var(--fa-font-solid);
   content: "\f1ce";
+  cursor: pointer;
 }
 .task-check:checked + .task-cnt0,
 .task-check:checked ~ .task-span {
@@ -516,4 +517,7 @@ button {
 }
 .active {
   display: inline-block;
+}
+.required::placeholder {
+  color: var(--secondary-red-accent);
 }
