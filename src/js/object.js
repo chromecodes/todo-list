@@ -2,7 +2,7 @@ export const object = (() =>{
     const objects = [   
         {name: "Tasks", obj:[{date: "2022-08-24" , priority: "low", task : "ca", completed : false},{date: "2019-08-24" , priority: "high", task : "caaaaaaa", completed : false}]},
                          {name: 'projects', obj:[{ title: 'GYM',value:[{date: "2022-08-24" , priority: "low", task : "ca", completed : false},{date: "2019-08-24" , priority: "high", task : "caaaaaaa", completed : false}]},{ title: 'Books to read',value:[]}]},
-                         {name:'All-Tasks'},     ]
+                         {name: 'Controls', obj:['All-Tasks','Today', 'Week','Important','Completed']},   ]
 
     const createTodo = (task, date , priority, completed = false) => {
         return ({task, date, priority, completed})
