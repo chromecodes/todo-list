@@ -23,25 +23,58 @@ export const makeProjectsList = ()=>{
     projectsTitleCnt.appendChild(projectsTitleCnt0);    
 }
 
-export const makeTodoList = (x) => {
-    console.log(x);
-    console.log(object.objects[0].obj);
-    let todo = x.obj;
-    console.log(todo);
+export const makeTodoList = (x, y, z) => {
+    let todo,topic;
 
+    if (x.name === 'projects') {
+        todo = x.obj[y].value
+    } else if (x.name === 'Controls') {
+         if (y === '') {
+            todo = object.objects[0].obj
+            topic = object.objects[0].name
+        } else {
+            todo = object.objects[1].obj[y].value
+            topic = object.objects[1].obj[y].title
+        } 
+    } else {
+        todo = x.obj;
+    }
+    
+ 
 
     const temp = document.querySelector('.task-list-cnt')
 
         for (let i = 0; i < todo.length; i++) {
-    
+
+            if(x.obj[z] === 'Completed'){
+                if(todo[i].completed === false){
+                    continue
+                };
+            } else if (x.obj[z] === 'Important'){
+                if(todo[i].priority !== 'high'){
+                    continue
+                };
+            } 
+
+          
+
             const taskElementCnt = document.createElement('div');
             taskElementCnt.setAttribute( 'class','task-cnt');
 
                 const taskCheck = document.createElement('input');
                 taskCheck.setAttribute( 'class','task-check');
                 taskCheck.setAttribute( 'type','checkbox');
-                taskCheck.setAttribute( 'id',`task-check-${i}`);
-                
+                taskCheck.setAttribute( 'data-index',`${i}`);
+                if(x.name === 'Controls'){
+                    taskCheck.setAttribute( 'id',`task-check-${i}-${y}`);
+                } else {
+                    taskCheck.setAttribute( 'id',`task-check-${i}`);
+                }
+                if((x.name === 'Controls') && (y !== '')){
+                    taskCheck.setAttribute( 'data-indexer',`${y}`);
+                }
+                taskCheck.checked = todo[i].completed;
+
             taskElementCnt.appendChild(taskCheck);    
 
                 const taskElementCnt0 = document.createElement('div');
@@ -52,7 +85,13 @@ export const makeTodoList = (x) => {
                 
                         const taskCheckLbl = document.createElement('label');
                         taskCheckLbl.setAttribute( 'class','task-check-lbl');
-                        taskCheckLbl.setAttribute( 'for',`task-check-${i}`);
+                        taskCheckLbl.setAttribute( 'data-index',`${i}`);
+                        if(x.name === 'Controls'){
+                            taskCheckLbl.setAttribute( 'for',`task-check-${i}-${y}`);
+                        } else {
+                            taskCheckLbl.setAttribute( 'for',`task-check-${i}`);
+                        }
+
                         if (todo[i].priority == 'low') {
                             taskCheckLbl.style.color = 'var(--secondary-drgreen-accent)'
                         } else if (todo[i].priority == 'high'){
@@ -65,7 +104,12 @@ export const makeTodoList = (x) => {
 
                         const taskContent = document.createElement('span');
                         taskContent.setAttribute( 'class','task-content');
-                        taskContent.textContent = todo[i].task;
+                        
+                        if(x.name === 'Controls'){
+                            taskContent.textContent = topic+ ' - ' +todo[i].task;
+                        } else {
+                            taskContent.textContent = todo[i].task;
+                        }
 
                     taskElementCnt1.appendChild(taskContent);    
 
@@ -80,16 +124,21 @@ export const makeTodoList = (x) => {
 
                     taskElementCnt2.appendChild(taskDate);    
 
-                        const taskEdit = document.createElement('button');
-                        taskEdit.setAttribute( 'class','task-edit');
-                        taskEdit.setAttribute( 'data-index',`${i}`);
-                    taskElementCnt2.appendChild(taskEdit);    
+                    if (x.name !== 'Controls') {
+                        
+                            const taskEdit = document.createElement('button');
+                            taskEdit.setAttribute( 'class','task-edit');
+                            taskEdit.setAttribute( 'data-index',`${i}`);
+                        taskElementCnt2.appendChild(taskEdit);    
 
-                        const taskDelete = document.createElement('button');
-                        taskDelete.setAttribute( 'class','task-delete');
-                        taskDelete.setAttribute( 'data-index',`${i}`);
+                            const taskDelete = document.createElement('button');
+                            taskDelete.setAttribute( 'class','task-delete');
+                            taskDelete.setAttribute( 'data-index',`${i}`);
+                        taskElementCnt2.appendChild(taskDelete);   
 
-                    taskElementCnt2.appendChild(taskDelete);    
+                    }
+
+                  
 
                 taskElementCnt0.appendChild(taskElementCnt2);   
                  
