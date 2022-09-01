@@ -22,17 +22,30 @@ function taskAdd(a, v){
     const taskInput = document.querySelector('#task');
     const dateInput = document.querySelector('#date');
     const priorityInput = document.querySelector('#priority');
-        if(a.name === 'projects'){
-        const titleInput = document.querySelector('#title');
-         a.obj[v].title = titleInput.value ;
-         object.addProjectValue(v, taskInput.value,dateInput.value, priorityInput.value);
+    if(dateInput.value === ''){
+        dateInput.valueAsDate = new Date()
+    }
+        if(taskInput.value.trim() !== ''){
+            taskInput.classList.remove('required')
+            if(a.name === 'projects'){
+                const titleInput = document.querySelector('#title');
+                a.obj[v].title = titleInput.value ;
+                object.addProjectValue(v, taskInput.value,dateInput.value, priorityInput.value);
+                console.log(a);
+                    clearContant();
+                    taskDisplay(a,v);
+                    assign(a,v);
+                } else {
+                    object.makeTodo(taskInput.value,dateInput.value, priorityInput.value);
+                }
+            taskInput.value = '',dateInput.value = '', priorityInput.value='low';
+            clearTodoList();
+            makeTodoList(a,v);
+            dynamicListeners(a,v);
         } else {
-            object.makeTodo(taskInput.value,dateInput.value, priorityInput.value);
+            taskInput.classList.add('required')
         }
-    taskInput.value = '',dateInput.value = '', priorityInput.value='low';
-    clearTodoList();
-    makeTodoList(a,v);
-    dynamicListeners(a,v);
+
 }
 
 function taskCancel(){
@@ -47,7 +60,39 @@ function taskCancel(){
 export const listeners = (()=>{
 
     const navListener =()=>{
-            
+        const allCtrl = document.querySelector('.all');
+        allCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2], 0);
+            makeTodoList(object.objects[2],'');
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i); }   
+           todoCtrlCheck();
+        });
+
+        const importantCtrl = document.querySelector('.important');
+        importantCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],3);
+            makeTodoList(object.objects[2],'', 3);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 3); }   
+           todoCtrlCheck();
+        });
+
+        const completedCtrl = document.querySelector('.completed');
+        completedCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],4);
+            makeTodoList(object.objects[2],'', 4);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 4); }   
+            todoCtrlCheck();
+            visibleTask()
+        });
+
+
+
         const navTaskBtn = document.querySelector(".task-nav");
             navTaskBtn.addEventListener('click', () => {
                 clearContant();
@@ -70,6 +115,19 @@ export const listeners = (()=>{
 
 })();
 
+function visibleTask(){
+    const taskCnts = document.querySelectorAll('.task-cnt0');
+        taskCnts.forEach(taskCnt => { taskCnt.style.display = 'flex'});
+        const taskSpan = document.querySelectorAll('.task-span');
+        taskSpan.forEach(taskCnt => { taskCnt.style.display = 'block'});
+        const checkLbls = document.querySelectorAll('.task-check');
+    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', (e)=>{
+        taskCnt.style.display = 'flex'
+    })
+})
+
+}
+
 const assign = (a, v) => {
 
     const taskBtn = document.querySelector('.task-btn');
@@ -86,15 +144,54 @@ const assign = (a, v) => {
         cancelBtn.addEventListener('click',taskCancel);
 }
 
+function todoCtrlCheck() {
+    const checkLbls = document.querySelectorAll('.task-check');
+    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', (e)=>{
+        let x =  e.target.dataset.index,  y =  e.target.dataset.indexer;
+        console.log(x);
+        console.log(y);
+            if (y === undefined){
+                console.log(1);
+                const taskcheck = document.querySelector(`#task-check-${x}-`);
+                console.log(taskcheck.checked);
+                object.objects[0].obj[x].completed = taskcheck.checked;
+                console.log(object.objects);
+            } else {
+                const taskcheck = document.querySelector(`#task-check-${x}-${y}`);
+                object.objects[1].obj[y].value[x].completed = taskcheck.checked;
+            }
+        })
+    })
+}
+
 function dynamicListeners(a, v){
-
-    const contentset = document.querySelectorAll('.taskupdatecnt');
-
+    todoCheck(a, v);
     todoEdit();
     todoUpdate(a, v);
     todoupdateCancel();
     todoDelete(a,v);
 }
+
+function todoCheck(a, v) {
+    const contentset = document.querySelectorAll('.taskupdatecnt');
+    const checkLbls = document.querySelectorAll('.task-check');
+    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', (e)=>{
+        let x =  e.target.dataset.index;
+        for (let i = 0; i < contentset.length; i++) {
+            if (contentset[i].classList[1] == x){
+                const taskcheck = document.querySelector(`#task-check-${x}`);
+                console.log(taskcheck.checked);
+                if(a.name === 'projects'){
+                    a.obj[v].value[x].completed = taskcheck.checked;
+                } else {
+                    a.obj[x].completed = taskcheck.checked;
+                }
+                console.log(object.objects);
+            }}
+        })
+    })
+}
+
 
 
 function todoEdit() {
@@ -118,6 +215,7 @@ function todoEdit() {
     });
 }
 function todoUpdate(a, v) {
+
     const contentset = document.querySelectorAll('.taskupdatecnt');
 
     const updateBtns = document.querySelectorAll('.update-btn');        
@@ -160,7 +258,7 @@ function todoDelete(a,v) {
         console.log(1);
         let x =  e.target.dataset.index;
         if(a.name === 'projects'){
-            removeProjectValue(v, x)
+            object.removeProjectValue(v, x);
         } else {
             object.removeTodo(x);
         }
@@ -234,12 +332,17 @@ function projectsTitleInputCtrl(){
         projectsTitleInputAddBtn.addEventListener('click', ()=>{
             const projectsTitleInput = document.querySelector('#project-title');
             console.log(projectsTitleInput.value);
-            object.addProjectTitle(projectsTitleInput.value);
-            projectsTitleInput.value = '';
-            projectsTitleListClear();
-            makeProjectsList();
-            projectOpeners();
-            
+                if(projectsTitleInput.value.trim() !== ''){
+                    projectsTitleInput.classList.remove('required')
+                    object.addProjectTitle(projectsTitleInput.value);
+                    projectsTitleInput.value = '';
+                    projectsTitleListClear();
+                    makeProjectsList();
+                    projectOpeners();
+                } else {
+                    projectsTitleInput.classList.add('required')
+                    
+                }
             }
         );
         const projectsTitleInputCloseBtn = document.querySelector('#project-title-cancel');
@@ -258,9 +361,8 @@ function projectOpeners(){
         let v =  e.target.dataset.index;
         clearContant();
         taskDisplay(object.objects[1],v);
-        assign();
-        makeTodoList(object.objects[1].obj[v].value);
-
-
+        assign(object.objects[1], v);
+        makeTodoList(object.objects[1], v);     
+        dynamicListeners(object.objects[1], v)
     }))
 }
