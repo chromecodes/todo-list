@@ -44,13 +44,15 @@ export const taskDisplay = (val, i)=>{
                 taskTitle.setAttribute("class","task-title");
                 if(val.name === 'projects'){
                     taskTitle.textContent = val.obj[i].title;                    
+                } else if (val.name === 'Controls'){
+                    taskTitle.textContent = val.obj[i];                    
                 } else {
                     taskTitle.textContent = val.name;
                 }
 
             contentHeader.appendChild(taskTitle);
 
-            if(val.name !== 'All-Tasks'){
+            if(val.name !== 'Controls') {
                 const taskBtn = document.createElement('button');
                 taskBtn.setAttribute("class","task-btn");
 
