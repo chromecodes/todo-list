@@ -165,13 +165,13 @@ button {
   gap: 6px;
 }
 .projects-nav {
-  padding: 8px 20px;
   display: flex;
   justify-content: space-between;
 }
 
 .projects-nav:hover > .projects-add-btn {
   display: block;
+  padding: 8px 20px 8px 0;
 }
 .projects-list-btn {
   color: inherit;
@@ -179,6 +179,7 @@ button {
   border: none;
   background: transparent;
   font-weight: inherit;
+  padding: 8px 0 8px 20px;
 }
 .projects-add-btn {
   color: inherit;
@@ -196,8 +197,8 @@ button {
   font: var(--fa-font-solid);
   content: "\2b";
 }
-.projects-add-btn:hover::before {
-  color: var(--secondary-lggreen-accent);
+.projects-add-btn:active::before {
+  color: var(--secondary-drgreen-accent);
 }
 .project-input-cnt {
   display: flex;
@@ -360,9 +361,9 @@ button {
 
 .task-cnt0 {
   padding: 5px 20px 5px;
-
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .task-check {
   display: none;
@@ -379,11 +380,16 @@ button {
 .task-check:checked ~ .task-span {
   display: none;
 }
+.task-content {
+  width: 48vmin;
+  overflow-wrap: anywhere;
+}
 .task-cnt1,
 .task-cnt2 {
   display: flex;
   gap: 20px;
 }
+
 .task-edit,
 .task-delete {
   border: none;
