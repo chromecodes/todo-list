@@ -1,4 +1,5 @@
 import { object } from './object';
+import { format, addDays, isWithinInterval, toDate} from 'date-fns'
 
 
 export const makeProjectsList = ()=>{
@@ -39,20 +40,29 @@ export const makeTodoList = (x, y, z) => {
     } else {
         todo = x.obj;
     }
-    
- 
+
 
     const temp = document.querySelector('.task-list-cnt')
 
         for (let i = 0; i < todo.length; i++) {
 
-            if(x.obj[z] === 'Completed'){
+            if(x.obj[z] === 'Today'){
+                if(todo[i].date !== format(new Date(), 'yyyy-MM-dd')){
+                    continue;
+                };
+            } else  if(x.obj[z] === 'Week'){
+                if(isWithinInterval(new Date(todo[i].date), { start: new Date().setHours(0,0,0,0), end: addDays(new Date().setHours(0,0,0,0), 7)})){
+                    console.log(1);
+                } else {
+                    continue;
+                }
+            } else if(x.obj[z] === 'Completed'){
                 if(todo[i].completed === false){
-                    continue
+                    continue;
                 };
             } else if (x.obj[z] === 'Important'){
                 if(todo[i].priority !== 'high'){
-                    continue
+                    continue;
                 };
             } 
 
@@ -136,7 +146,15 @@ export const makeTodoList = (x, y, z) => {
                             taskDelete.setAttribute( 'data-index',`${i}`);
                         taskElementCnt2.appendChild(taskDelete);   
 
-                    }
+                    } else if(x.obj[z] === 'Completed'){
+                        const taskDelete = document.createElement('button');
+                            taskDelete.setAttribute( 'class','task-delete');
+                            taskDelete.setAttribute( 'data-index',`${i}`);
+                            if((y !== '')){
+                                taskDelete.setAttribute( 'data-indexer',`${y}`);
+                            }
+                        taskElementCnt2.appendChild(taskDelete);   
+                    } 
 
                   
 
