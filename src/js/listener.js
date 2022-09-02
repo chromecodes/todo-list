@@ -69,6 +69,25 @@ export const listeners = (()=>{
             makeTodoList(object.objects[2], i); }   
            todoCtrlCheck();
         });
+        const todayCtrl = document.querySelector('.today');
+        todayCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],1);
+            makeTodoList(object.objects[2],'', 1);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 1); }   
+           todoCtrlCheck();
+        });
+
+        const weekCtrl = document.querySelector('.week');
+        weekCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],2);
+            makeTodoList(object.objects[2],'', 2);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 2); }   
+           todoCtrlCheck();
+        });
 
         const importantCtrl = document.querySelector('.important');
         importantCtrl.addEventListener('click',()=>{
@@ -85,10 +104,10 @@ export const listeners = (()=>{
             clearContant();
             taskDisplay(object.objects[2],4);
             makeTodoList(object.objects[2],'', 4);
-           for( let i=0; i < object.objects[1].obj.length; i++){
-            makeTodoList(object.objects[2], i, 4); }   
+            for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 4); };
             todoCtrlCheck();
-            visibleTask()
+            completedCtrlSpcl();
         });
 
 
@@ -108,25 +127,34 @@ export const listeners = (()=>{
         const navProjectsBtn = document.querySelector('.projects-add-btn')
         navProjectsBtn.addEventListener('click',projectsTitleInputCtrl)
     }
-
-    
             
     return { navListener }
 
 })();
 
-function visibleTask(){
+function completedCtrlSpcl(){
     const taskCnts = document.querySelectorAll('.task-cnt0');
         taskCnts.forEach(taskCnt => { taskCnt.style.display = 'flex'});
         const taskSpan = document.querySelectorAll('.task-span');
         taskSpan.forEach(taskCnt => { taskCnt.style.display = 'block'});
         const checkLbls = document.querySelectorAll('.task-check');
-    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', (e)=>{
-        taskCnt.style.display = 'flex'
-    })
-})
+    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', ()=>{
+        const completedCtrl = document.querySelector('.completed');
+        completedCtrl.click();
+    }) });
+    const deleteBtns = document.querySelectorAll('.task-delete');
+    deleteBtns.forEach(deleteBtn => { deleteBtn.addEventListener('click', (e)=>{
+        const completedCtrl = document.querySelector('.completed');
+        let x =  e.target.dataset.index,  y =  e.target.dataset.indexer;
+            if (y === undefined){
+                object.removeTodo(x);
+            } else {
+                object.removeProjectValue(y, x);
+            }
+            completedCtrl.click();
+        }); });
+};
 
-}
 
 const assign = (a, v) => {
 
@@ -208,7 +236,6 @@ function todoEdit() {
                 if (contentset[i].classList[1] == x){
                     contentset[i].classList.toggle('visible');
                     console.log(2);
-
                 };
             };
         });
@@ -223,7 +250,6 @@ function todoUpdate(a, v) {
         console.log(1);
         let x =  e.target.dataset.index;
             for (let i = 0; i < contentset.length; i++) {
-
                 if (contentset[i].classList[1] == x){
                     const taskUpdate = contentset[i].querySelector('#task-update');
                     const dateUpdate = contentset[i].querySelector('#date-update');
@@ -362,7 +388,21 @@ function projectOpeners(){
         clearContant();
         taskDisplay(object.objects[1],v);
         assign(object.objects[1], v);
+        deleteProjectListener();
         makeTodoList(object.objects[1], v);     
         dynamicListeners(object.objects[1], v)
     }))
+}
+function deleteProjectListener(){
+    const deleteBtn =  document.querySelector('.project-delete');
+    const allCtrl = document.querySelector('.all');
+
+    deleteBtn.addEventListener("click",(e)=>{
+        let v =  e.target.dataset.index;
+        object.removeProject(v);
+        allCtrl.click();
+        projectsTitleListClear();
+        makeProjectsList();
+        projectOpeners();
+    })
 }
