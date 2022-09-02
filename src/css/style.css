@@ -2,16 +2,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&family=Quicksand&family=Saira:ital,wght@1,300;1,400&display=swap);
 
 :root {
-  /* --royal-blue-dark: #1a2a68;
-  --green-blue-crayola: #1789c9;
-  --apple-green: #94c200;
-  --avocado: #667f00;
-  --deep-saffron: #ef9740;
-  --jet: #3a3532;
-  --raisin-black: #292524;
-  --cardinal: #c12e3e;
-  --claret: #6a1727; */
-
   --primary-bg-color: #1a1a1a;
   --secondary-bg-color: #333333;
   --terinary-bg-color: #4d4d4d;
@@ -24,7 +14,7 @@
   --primary-lggreen-accent: #b3ffd9;
   --secondary-lggreen-accent: #00ff7f;
 
-  --primary-drgreen-accent: #94c200;
+  --primary-drgreen-accent: #4eff10;
   --secondary-drgreen-accent: #94c200;
   --primary-saffron-accent: #ffccb3;
   --secondary-saffron-accent: #ff9966;
@@ -48,6 +38,9 @@ body {
   flex-direction: column;
   align-items: stretch;
 }
+a {
+  text-decoration: none;
+}
 
 button {
   cursor: pointer;
@@ -70,31 +63,43 @@ button {
 .header {
   font-size: 24px;
   font-weight: 600;
-  height: 45px;
+  height: 7vh;
+  width: 100%;
   color: var(--primary-color);
   display: flex;
   align-items: center;
   padding-left: 100px;
   background: var(--primary-liner-gradient-accent);
+  position: fixed;
 }
 
 /***   MAIN SECTION   ***/
 
 .main {
-  flex: 1;
-  height: 100%;
+  padding-top: 7vh;
+  height: 100vh;
   background-color: var(--primary-bg-color);
-  height: 100%;
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-areas: "nav display";
 }
 
 /***   NAV SECTION   ***/
-
 .nav {
-  grid-area: nav;
+  height: 93vh;
+  width: 20%;
+  display: flex;
   background-color: var(--secondary-bg-color);
+  flex-direction: column;
+  position: fixed;
+  overflow: auto;
+}
+.nav-back {
+  grid-area: nav;
+}
+.navCnt {
+  flex: 1;
+  height: 100%;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -247,6 +252,7 @@ button {
 .display {
   padding: 30px;
   color: var(--primary-color);
+  overflow: auto;
 }
 .content-header {
   display: flex;
@@ -254,6 +260,10 @@ button {
 }
 .task-title {
   font-size: 24px;
+}
+.task-control {
+  display: flex;
+  gap: 5px;
 }
 .task-btn {
   display: flex;
@@ -391,7 +401,8 @@ button {
 }
 
 .task-edit,
-.task-delete {
+.task-delete,
+.project-delete {
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -406,7 +417,8 @@ button {
   content: "\f304";
   color: #a4d7f4;
 }
-.task-delete::before {
+.task-delete::before,
+.project-delete::before {
   display: inline-block;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -417,7 +429,8 @@ button {
 .task-edit:hover::before {
   color: #1789c9;
 }
-.task-delete:hover::before {
+.task-delete:hover::before,
+.project-delete:hover::before {
   color: #c12e3e;
 }
 .task-span {
@@ -483,23 +496,24 @@ button {
 /***   FOOTER SECTION   ***/
 
 .footer {
-  background: var(--primary-liner-gradient-accent);
-  border-top: var(--primary-accent) solid 2px;
-  color: var(--primary-accent);
+  border-top: 1px solid var(--terinary-bg-color);
+  color: var(--secondary-drgreen-accent);
   padding: 10px 0px 4px 0px;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 }
-
+.odin {
+  color: var(--primary-drgreen-accent);
+}
 .fa-code {
-  font-size: 18px;
-  color: var(--cardinal);
+  font-size: 16px;
+  color: var(--secondary-red-accent);
   transition: transform 0.5s ease-in-out;
 }
 
 .fa-github {
-  font-size: 20px;
-  color: var(--secondary-liner-gradient-accent);
+  font-size: 18px;
+  color: var(--secondary-blue-accent);
   transition: transform 0.5s ease-in-out;
 }
 
