@@ -1,8 +1,51 @@
+import { format, addDays } from 'date-fns'
+
+let newDate = format(addDays(new Date().setHours(0,0,0,0), 7), 'yyyy-MM-dd');
+
+
+console.log(newDate);
+
 export const object = (() =>{
     const objects = [   
-        {name: "Tasks", obj:[{date: "2022-08-24" , priority: "low", task : "ca", completed : false},{date: "2019-08-24" , priority: "high", task : "caaaaaaa", completed : false}]},
-                         {name: 'projects', obj:[{ title: 'GYM',value:[{date: "2022-08-24" , priority: "low", task : "ca", completed : false},{date: "2019-08-24" , priority: "high", task : "caaaaaaa", completed : false}]},{ title: 'Books to read',value:[]}]},
-                         {name: 'Controls', obj:['All-Tasks','Today', 'Week','Important','Completed']},   ]
+        {name: "Tasks", 
+         obj:[
+                {  task : "HI! THERE. HOW ARE YOU!", date:`${format(new Date(), 'yyyy-MM-dd')}`,priority: "low",completed : false },
+                {  task : "HOPE YOU ARE DOING WELL", date: `${format(addDays(new Date().setHours(0,0,0,0), 1), 'yyyy-MM-dd')}`, priority: "mild", completed : false },
+                {  task : "KEEP GOING. YOU CAN DO IT", date: `${format(addDays(new Date().setHours(0,0,0,0), 2), 'yyyy-MM-dd')}`, priority: "high", completed : false },
+             ]
+        },
+         {name: 'projects', 
+          obj:[{ title: 'GYM',
+                 value:[
+                        {task : "Upper Day", date: `${format(new Date(), 'yyyy-MM-dd')}`, priority: "high",  completed : false},
+                        {task : "Lower Day", date: `${format(addDays(new Date().setHours(0,0,0,0), 1), 'yyyy-MM-dd')}`, priority: "high", completed : false},
+                        {task : "Rest Day", date: `${format(addDays(new Date().setHours(0,0,0,0), 2), 'yyyy-MM-dd')}`, priority: "high", completed : false},
+                        
+                        {task : "Upper Day", date: `${format(addDays(new Date().setHours(0,0,0,0), 3), 'yyyy-MM-dd')}`, priority: "high", completed : false},
+                        {task : "Lower Day", date: `${format(addDays(new Date().setHours(0,0,0,0), 4), 'yyyy-MM-dd')}`, priority: "high", completed : false},
+                        {task : "Rest Day", date: `${format(addDays(new Date().setHours(0,0,0,0), 5), 'yyyy-MM-dd')}`, priority: "high", completed : false},
+
+                       ]
+                },
+                { title: 'Coding',
+                value:[
+                        {task : "Complete Project Todo-List", date: `2022-09-02`, priority: "mild",  completed : true},
+                        {task : "Daily Learning", date: `${format(new Date(), 'yyyy-MM-dd')}`, priority: "mild",  completed : false},
+                        {task : "Complete Javascript", date:`${format(addDays(new Date().setHours(0,0,0,0), 7), 'yyyy-MM-dd')}`, priority: "high",  completed : false},
+                        {task : "Start React", date: `${format(addDays(new Date().setHours(0,0,0,0), 8), 'yyyy-MM-dd')}`, priority: "mild", completed : false}
+                      ]
+                },
+                { title: 'Books to read',
+                  value:[
+                            {task : "Chosen Ones", date: `${format(new Date(), 'yyyy-MM-dd')}`, priority: "low",  completed : true},
+                            {task : "Atomic Habits", date: `${format(addDays(new Date().setHours(0,0,0,0), 9), 'yyyy-MM-dd')}`, priority: "low", completed : false}
+                        ]
+                },
+            ]
+        },
+          {name: 'Controls', 
+           obj:['All-Tasks','Today', 'Week','Important','Completed']},
+        ]
 
     const createTodo = (task, date , priority, completed = false) => {
         return ({task, date, priority, completed})
@@ -26,26 +69,12 @@ export const object = (() =>{
     }
     const removeProjectValue = (v, i) =>{
         objects[1].obj[v].value.splice(i,1);
-
     }
-    return { objects, makeTodo, removeTodo, addProjectTitle, addProjectValue, removeProjectValue}
+    const removeProject = (i) =>{
+        objects[1].obj.splice(i,1);
+    }
+    return { objects, makeTodo, removeTodo, addProjectTitle, addProjectValue, removeProjectValue, removeProject}
 })();
 
 
 
-// export const projectObject = (() =>{
-//     const obje = [{date: "2022-08-24" , priority: "low", task : "ca"},{date: "2019-08-24" , priority: "high", task : "caaaaaaa"}];
-
-//     const createTodo = (task, date, priority) => {
-//         return ({task, date, priority})
-//     };
-
-//     const makeTodo = (task, date, priority) => { 
-//         todos.push(createTodo(task, date, priority))
-//         console.log(todos);
-//     };
-//     const removeTodo = (i) => {
-//         todos.splice(i,1);
-//     }
-//     return { todos, makeTodo, removeTodo}
-// })();
