@@ -53,10 +53,26 @@ export const taskDisplay = (val, i)=>{
             contentHeader.appendChild(taskTitle);
 
             if(val.name !== 'Controls') {
-                const taskBtn = document.createElement('button');
-                taskBtn.setAttribute("class","task-btn");
+                const contentHeader2 = document.createElement('div');
+                contentHeader2.setAttribute("class","task-control");
 
-            contentHeader.appendChild(taskBtn);
+                    const taskBtn = document.createElement('button');
+                    taskBtn.setAttribute("class","task-btn");
+
+                contentHeader2.appendChild(taskBtn);
+
+                    if (val.name === 'projects'){
+
+                        const projectDelete = document.createElement('button');
+                        projectDelete.setAttribute( 'class','project-delete');
+                        projectDelete.setAttribute( 'id','project-delete');
+                        projectDelete.setAttribute( 'data-index',`${i}`);
+
+                        contentHeader2.appendChild(projectDelete);
+                    }
+
+            contentHeader.appendChild(contentHeader2);
+            
             }
         content.appendChild(contentHeader);    
 
