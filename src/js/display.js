@@ -145,12 +145,14 @@ export const taskDisplay = (val, i)=>{
 
                         const taskAddBtn =  document.createElement('button');
                         taskAddBtn.setAttribute("class","add-btn");
+                        taskAddBtn.setAttribute("id","add-btn");
                         taskAddBtn.textContent = "Add";
 
                     taskInputCnt2.appendChild(taskAddBtn);
 
                         const taskCloseBtn =  document.createElement('button');
                         taskCloseBtn.setAttribute("class","cancel-btn");
+                        taskCloseBtn.setAttribute("id","cancel-btn");
                         taskCloseBtn.textContent = "Cancel";
 
                     taskInputCnt2.appendChild(taskCloseBtn);
