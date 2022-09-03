@@ -75,6 +75,3 @@ export const object = (() =>{
     }
     return { objects, makeTodo, removeTodo, addProjectTitle, addProjectValue, removeProjectValue, removeProject}
 })();
-
-
-
