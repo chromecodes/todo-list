@@ -27,6 +27,12 @@
     #4eff10 35%,
     #00ff7f 85%
   );
+  --primary-conic-gradient-accent: conic-gradient(
+    #c12e3e 68deg,
+    #94c200 135deg,
+    #94c200 225deg,
+    #1789c9 292deg
+  );
 }
 body {
   font-family: "Nunito", sans-serif;
@@ -68,16 +74,32 @@ button {
   color: var(--primary-color);
   display: flex;
   align-items: center;
-  padding-left: 100px;
+  padding-left: 130px;
   background: var(--primary-liner-gradient-accent);
   position: fixed;
 }
+
+.header::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  content: "\f1ce";
+  margin-right: 15px;
+  background: var(--primary-conic-gradient-accent);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+/* background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; */
 
 /***   MAIN SECTION   ***/
 
 .main {
   padding-top: 7vh;
-  height: 100vh;
+  height: 93vh;
   background-color: var(--primary-bg-color);
   display: grid;
   grid-template-columns: 20% 80%;
@@ -230,6 +252,7 @@ button {
   border-radius: 5px;
   background: var(--terinary-bg-color);
 }
+
 #project-title-add {
   grid-area: projectadd;
 }
@@ -246,7 +269,16 @@ button {
   width: 90%;
   font-size: 16px;
   font-weight: 400;
-  padding: 2px 5px;
+  padding: 4px 10px;
+  display: flex;
+  gap: 10px;
+}
+.project-title::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  content: "\f105";
 }
 /***   DISPLAY SECTION   ***/
 .display {
