@@ -187,8 +187,6 @@ function todoCtrlCheck() {
     const checkLbls = document.querySelectorAll('.task-check');
     checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', (e)=>{
         let x =  e.target.dataset.index,  y =  e.target.dataset.indexer;
-        console.log(x);
-        console.log(y);
             if (y === undefined){
                 console.log(1);
                 const taskcheck = document.querySelector(`#task-check-${x}-`);
@@ -199,6 +197,7 @@ function todoCtrlCheck() {
                 const taskcheck = document.querySelector(`#task-check-${x}-${y}`);
                 object.objects[1].obj[y].value[x].completed = taskcheck.checked;
             }
+            updateStorage();
         })
     })
 }
@@ -219,17 +218,14 @@ function todoCheck(a, v) {
                 } else {
                     a.obj[x].completed = taskcheck.checked;
                 }
-                console.log(object.objects);
+                updateStorage();
             }}
         })
     })
 }
 
-
-
 function todoEdit() {
     const contentset = document.querySelectorAll('.taskupdatecnt');
-
     const editBtns = document.querySelectorAll('.task-edit');
     console.log(editBtns);
     editBtns.forEach(editBtn => { editBtn.addEventListener('click', (e)=>{
@@ -249,7 +245,6 @@ function todoEdit() {
 function todoUpdate(a, v) {
 
     const contentset = document.querySelectorAll('.taskupdatecnt');
-
     const updateBtns = document.querySelectorAll('.update-btn');        
     updateBtns.forEach(updateBtn => { updateBtn.addEventListener('click', (e)=>{
         console.log(1);
@@ -274,6 +269,7 @@ function todoUpdate(a, v) {
                         a.obj[x].date = dateUpdate.value;
                         a.obj[x].priority = priorityUpdate.value;
                     }
+                    updateStorage();
                     clearTodoList();
                     makeTodoList(a, v);
                     dynamicListeners(a,v)
@@ -372,7 +368,7 @@ function projectsTitleInputCtrl(){
                     projectOpeners();
                 } else {
                     projectsTitleInput.classList.add('required')
-                    
+    
                 }
             }
         );
@@ -410,4 +406,7 @@ function deleteProjectListener(){
         makeProjectsList();
         projectOpeners();
     })
+}
+function updateStorage() {
+    localStorage.setItem("objectInStorage", JSON.stringify(object.objects));
 }
