@@ -3,6 +3,132 @@ import { makeProjectsList, makeTodoList } from './maketodolist';
 import { projectTitleInput, taskDisplay } from './display';
 
 
+
+
+export const listeners = (()=>{
+
+    const navListener =()=>{
+        const allCtrl = document.querySelector('.all');
+        allCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2], 0);
+            makeTodoList(object.objects[2],'');
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i); }   
+           todoCtrlCheck();
+        });
+
+        const todayCtrl = document.querySelector('.today');
+        todayCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],1);
+            makeTodoList(object.objects[2],'', 1);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 1); }   
+           todoCtrlCheck();
+        });
+
+        const weekCtrl = document.querySelector('.week');
+        weekCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],2);
+            makeTodoList(object.objects[2],'', 2);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 2); }   
+           todoCtrlCheck();
+        });
+
+        const importantCtrl = document.querySelector('.important');
+        importantCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],3);
+            makeTodoList(object.objects[2],'', 3);
+           for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 3); }   
+           todoCtrlCheck();
+        });
+
+        const completedCtrl = document.querySelector('.completed');
+        completedCtrl.addEventListener('click',()=>{
+            clearContant();
+            taskDisplay(object.objects[2],4);
+            makeTodoList(object.objects[2],'', 4);
+            for( let i=0; i < object.objects[1].obj.length; i++){
+            makeTodoList(object.objects[2], i, 4); };
+            todoCtrlCheck();
+            completedCtrlSpcl();
+        });
+
+        const navTaskBtn = document.querySelector(".task-nav");
+            navTaskBtn.addEventListener('click', () => {
+                clearContant();
+                taskDisplay(object.objects[0]);
+                makeTodoList(object.objects[0]);
+                assign(object.objects[0]);
+                dynamicListeners(object.objects[0])
+            })
+
+        const navProjects = document.querySelector('.projects-list-btn');
+        navProjects.addEventListener('click', projectsTitleListCtrl )
+
+        const navProjectsBtn = document.querySelector('.projects-add-btn')
+        navProjectsBtn.addEventListener('click',projectsTitleInputCtrl)
+
+        allCtrl.click();
+    }
+            
+    return { navListener }
+
+})();
+
+const assign = (a, v) => {
+
+    const taskBtn = document.querySelector('.task-btn');
+    const taskInputCnt = document.querySelector('.taskinputcnt');
+        taskBtn.addEventListener('click', ()=> {
+            taskInputCnt.classList.toggle('visible');
+            const cancelBtn = document.querySelector('#cancel-btn');
+            const addBtn = document.querySelector('#add-btn');
+            console.log(addBtn);
+            addBtn.addEventListener('click', ()=>{
+                console.log(1);
+                taskAdd(a, v)
+            });
+            cancelBtn.addEventListener('click',taskCancel);
+        });
+}
+
+function dynamicListeners(a, v){
+    todoCheck(a, v);
+    todoEdit();
+    todoUpdate(a, v);
+    todoupdateCancel();
+    todoDelete(a,v);
+}
+
+function completedCtrlSpcl(){
+    const taskCnts = document.querySelectorAll('.task-cnt0');
+        taskCnts.forEach(taskCnt => { taskCnt.style.display = 'flex'});
+        const taskSpan = document.querySelectorAll('.task-span');
+        taskSpan.forEach(taskCnt => { taskCnt.style.display = 'block'});
+        const checkLbls = document.querySelectorAll('.task-check');
+    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', ()=>{
+        const completedCtrl = document.querySelector('.completed');
+        completedCtrl.click();
+    }) });
+    const deleteBtns = document.querySelectorAll('.task-delete');
+    deleteBtns.forEach(deleteBtn => { deleteBtn.addEventListener('click', (e)=>{
+        const completedCtrl = document.querySelector('.completed');
+        let x =  e.target.dataset.index,  y =  e.target.dataset.indexer;
+            if (y === undefined){
+                object.removeTodo(x);
+            } else {
+                object.removeProjectValue(y, x);
+            }
+            completedCtrl.click();
+        }); });
+};
+
 function clearContant() {
     const display = document.querySelector('.display');
     const content = document.querySelector('.content');
@@ -45,7 +171,6 @@ function taskAdd(a, v){
         } else {
             taskInput.classList.add('required')
         }
-
 }
 
 function taskCancel(){
@@ -57,120 +182,6 @@ function taskCancel(){
     taskInputCnt.classList.remove('visible');
 }
 
-export const listeners = (()=>{
-
-    const navListener =()=>{
-        const allCtrl = document.querySelector('.all');
-        allCtrl.addEventListener('click',()=>{
-            clearContant();
-            taskDisplay(object.objects[2], 0);
-            makeTodoList(object.objects[2],'');
-           for( let i=0; i < object.objects[1].obj.length; i++){
-            makeTodoList(object.objects[2], i); }   
-           todoCtrlCheck();
-        });
-        const todayCtrl = document.querySelector('.today');
-        todayCtrl.addEventListener('click',()=>{
-            clearContant();
-            taskDisplay(object.objects[2],1);
-            makeTodoList(object.objects[2],'', 1);
-           for( let i=0; i < object.objects[1].obj.length; i++){
-            makeTodoList(object.objects[2], i, 1); }   
-           todoCtrlCheck();
-        });
-
-        const weekCtrl = document.querySelector('.week');
-        weekCtrl.addEventListener('click',()=>{
-            clearContant();
-            taskDisplay(object.objects[2],2);
-            makeTodoList(object.objects[2],'', 2);
-           for( let i=0; i < object.objects[1].obj.length; i++){
-            makeTodoList(object.objects[2], i, 2); }   
-           todoCtrlCheck();
-        });
-
-        const importantCtrl = document.querySelector('.important');
-        importantCtrl.addEventListener('click',()=>{
-            clearContant();
-            taskDisplay(object.objects[2],3);
-            makeTodoList(object.objects[2],'', 3);
-           for( let i=0; i < object.objects[1].obj.length; i++){
-            makeTodoList(object.objects[2], i, 3); }   
-           todoCtrlCheck();
-        });
-
-        const completedCtrl = document.querySelector('.completed');
-        completedCtrl.addEventListener('click',()=>{
-            clearContant();
-            taskDisplay(object.objects[2],4);
-            makeTodoList(object.objects[2],'', 4);
-            for( let i=0; i < object.objects[1].obj.length; i++){
-            makeTodoList(object.objects[2], i, 4); };
-            todoCtrlCheck();
-            completedCtrlSpcl();
-        });
-
-
-
-        const navTaskBtn = document.querySelector(".task-nav");
-            navTaskBtn.addEventListener('click', () => {
-                clearContant();
-                taskDisplay(object.objects[0]);
-                makeTodoList(object.objects[0]);
-                assign(object.objects[0]);
-                dynamicListeners(object.objects[0])
-            })
-
-        const navProjects = document.querySelector('.projects-list-btn');
-        navProjects.addEventListener('click', projectsTitleListCtrl )
-
-        const navProjectsBtn = document.querySelector('.projects-add-btn')
-        navProjectsBtn.addEventListener('click',projectsTitleInputCtrl)
-    }
-            
-    return { navListener }
-
-})();
-
-function completedCtrlSpcl(){
-    const taskCnts = document.querySelectorAll('.task-cnt0');
-        taskCnts.forEach(taskCnt => { taskCnt.style.display = 'flex'});
-        const taskSpan = document.querySelectorAll('.task-span');
-        taskSpan.forEach(taskCnt => { taskCnt.style.display = 'block'});
-        const checkLbls = document.querySelectorAll('.task-check');
-    checkLbls.forEach(checkLbl => { checkLbl.addEventListener('click', ()=>{
-        const completedCtrl = document.querySelector('.completed');
-        completedCtrl.click();
-    }) });
-    const deleteBtns = document.querySelectorAll('.task-delete');
-    deleteBtns.forEach(deleteBtn => { deleteBtn.addEventListener('click', (e)=>{
-        const completedCtrl = document.querySelector('.completed');
-        let x =  e.target.dataset.index,  y =  e.target.dataset.indexer;
-            if (y === undefined){
-                object.removeTodo(x);
-            } else {
-                object.removeProjectValue(y, x);
-            }
-            completedCtrl.click();
-        }); });
-};
-
-
-const assign = (a, v) => {
-
-    const taskBtn = document.querySelector('.task-btn');
-
-    const taskInputCnt = document.querySelector('.taskinputcnt');
-    const cancelBtn = document.querySelector('.cancel-btn');
-    const addBtn = document.querySelector('.add-btn');
-        taskBtn.addEventListener('click', ()=> {
-            taskInputCnt.classList.toggle('visible');
-        });
-        addBtn.addEventListener('click', ()=>{
-            taskAdd(a, v)
-        });
-        cancelBtn.addEventListener('click',taskCancel);
-}
 
 function todoCtrlCheck() {
     const checkLbls = document.querySelectorAll('.task-check');
@@ -192,13 +203,7 @@ function todoCtrlCheck() {
     })
 }
 
-function dynamicListeners(a, v){
-    todoCheck(a, v);
-    todoEdit();
-    todoUpdate(a, v);
-    todoupdateCancel();
-    todoDelete(a,v);
-}
+
 
 function todoCheck(a, v) {
     const contentset = document.querySelectorAll('.taskupdatecnt');
