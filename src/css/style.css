@@ -657,6 +657,12 @@ button {
   .task-cnt0 {
     padding: 5px 7px;
   }
+  .taskinputcnt {
+    padding: 1px 5px 2px;
+  }
+  .taskinputcnt1 {
+    width: 175px;
+  }
   .task-span {
     margin: 2px 10px;
   }
