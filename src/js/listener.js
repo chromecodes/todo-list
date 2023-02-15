@@ -93,9 +93,7 @@ const assign = (a, v) => {
     taskInputCnt.classList.toggle("visible");
     const cancelBtn = document.querySelector("#cancel-btn");
     const addBtn = document.querySelector("#add-btn");
-    console.log(addBtn);
     addBtn.addEventListener("click", () => {
-      console.log(1);
       taskAdd(a, v);
     });
     cancelBtn.addEventListener("click", taskCancel);
@@ -174,7 +172,6 @@ function taskAdd(a, v) {
         dateInput.value,
         priorityInput.value
       );
-      console.log(a);
       clearContant();
       taskDisplay(a, v);
       assign(a, v);
@@ -208,11 +205,8 @@ function todoCtrlCheck() {
       let x = e.target.dataset.index,
         y = e.target.dataset.indexer;
       if (y === undefined) {
-        console.log(1);
         const taskcheck = document.querySelector(`#task-check-${x}-`);
-        console.log(taskcheck.checked);
         object.objects[0].obj[x].completed = taskcheck.checked;
-        console.log(object.objects);
       } else {
         const taskcheck = document.querySelector(`#task-check-${x}-${y}`);
         object.objects[1].obj[y].value[x].completed = taskcheck.checked;
@@ -231,7 +225,6 @@ function todoCheck(a, v) {
       for (let i = 0; i < contentset.length; i++) {
         if (contentset[i].classList[1] == x) {
           const taskcheck = document.querySelector(`#task-check-${x}`);
-          console.log(taskcheck.checked);
           if (a.name === "projects") {
             a.obj[v].value[x].completed = taskcheck.checked;
           } else {
@@ -247,17 +240,12 @@ function todoCheck(a, v) {
 function todoEdit() {
   const contentset = document.querySelectorAll(".taskupdatecnt");
   const editBtns = document.querySelectorAll(".task-edit");
-  console.log(editBtns);
   editBtns.forEach((editBtn) => {
     editBtn.addEventListener("click", (e) => {
       let x = e.target.dataset.index;
-      console.log(1);
-      console.log(contentset);
       for (let i = 0; i < contentset.length; i++) {
-        console.log(contentset[i].className);
         if (contentset[i].classList[1] == x) {
           contentset[i].classList.toggle("visible");
-          console.log(2);
         }
       }
     });
@@ -268,7 +256,6 @@ function todoUpdate(a, v) {
   const updateBtns = document.querySelectorAll(".update-btn");
   updateBtns.forEach((updateBtn) => {
     updateBtn.addEventListener("click", (e) => {
-      console.log(1);
       let x = e.target.dataset.index;
       for (let i = 0; i < contentset.length; i++) {
         if (contentset[i].classList[1] == x) {
@@ -276,17 +263,11 @@ function todoUpdate(a, v) {
           const dateUpdate = contentset[i].querySelector("#date-update");
           const priorityUpdate =
             contentset[i].querySelector("#priority-update");
-          console.log(2);
-
           if (a.name === "projects") {
-            console.log(3);
-
             a.obj[v].value[x].task = taskUpdate.value;
             a.obj[v].value[x].date = dateUpdate.value;
             a.obj[v].value[x].priority = priorityUpdate.value;
           } else {
-            console.log(4);
-
             a.obj[x].task = taskUpdate.value;
             a.obj[x].date = dateUpdate.value;
             a.obj[x].priority = priorityUpdate.value;
@@ -305,7 +286,6 @@ function todoDelete(a, v) {
 
   deleteBtns.forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", (e) => {
-      console.log(1);
       let x = e.target.dataset.index;
       if (a.name === "projects") {
         object.removeProjectValue(v, x);
@@ -346,13 +326,11 @@ function projectsTitleListClear() {
 
 function projectsTitleListCtrl() {
   const tempCnt = document.querySelector(".project-input-cnt");
-  console.log(tempCnt.firstChild);
   if (tempCnt.firstChild !== null) {
     const tempCntChild = document.querySelector(".projectsinputcnt0");
     tempCnt.removeChild(tempCntChild);
   }
   const tempTitleCnt = document.querySelector(".projects-list-cnt");
-  console.log(tempTitleCnt.firstChild);
   if (tempTitleCnt.firstChild !== null) {
     const tempTitleCntChild = document.querySelector(".projects-title-cnt");
     tempTitleCnt.removeChild(tempTitleCntChild);
@@ -364,13 +342,11 @@ function projectsTitleListCtrl() {
 
 function projectsTitleInputCtrl() {
   const tempTitleCnt = document.querySelector(".projects-list-cnt");
-  console.log(tempTitleCnt.firstChild);
   if (tempTitleCnt.firstChild === null) {
     makeProjectsList();
   }
 
   const tempCnt = document.querySelector(".project-input-cnt");
-  console.log(tempCnt.firstChild);
   if (tempCnt.firstChild !== null) {
     const tempCntChild = document.querySelector(".projectsinputcnt0");
     tempCnt.removeChild(tempCntChild);
@@ -380,7 +356,6 @@ function projectsTitleInputCtrl() {
       document.querySelector("#project-title-add");
     projectsTitleInputAddBtn.addEventListener("click", () => {
       const projectsTitleInput = document.querySelector("#project-title");
-      console.log(projectsTitleInput.value);
       if (projectsTitleInput.value.trim() !== "") {
         projectsTitleInput.classList.remove("required");
         object.addProjectTitle(projectsTitleInput.value);
