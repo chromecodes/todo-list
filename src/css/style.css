@@ -69,7 +69,7 @@ button {
 .header {
   font-size: 24px;
   font-weight: 600;
-  height: 7vh;
+  height: 8vh;
   width: 100%;
   color: var(--primary-color);
   display: flex;
@@ -98,8 +98,8 @@ button {
 /***   MAIN SECTION   ***/
 
 .main {
-  padding-top: 7vh;
-  height: 93vh;
+  padding-top: 8vh;
+  height: 92vh;
   background-color: var(--primary-bg-color);
   display: grid;
   grid-template-columns: 20% 80%;
@@ -108,17 +108,13 @@ button {
 
 /***   NAV SECTION   ***/
 .nav {
-  height: 93vh;
-  width: 20%;
+  height: 92vh;
   display: flex;
   background-color: var(--secondary-bg-color);
   flex-direction: column;
-  position: fixed;
-  overflow: auto;
-}
-.nav-back {
   grid-area: nav;
 }
+
 .navCnt {
   flex: 1;
   height: 100%;
@@ -126,6 +122,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow: auto;
 }
 
 .controls {
@@ -136,8 +133,12 @@ button {
     "all all"
     "today week"
     "important completed";
-  gap: 2.5px;
+  gap: 6px;
   padding-bottom: 20px;
+  font-size: 18px;
+}
+.controls > button {
+  padding: 4px 0 4px 0;
 }
 .all {
   grid-area: all;
@@ -515,6 +516,10 @@ button {
 .cancelupdate-btn:hover {
   background-color: var(--secondary-saffron-accent);
 }
+
+.expArrow {
+  display: none;
+}
 /* #task {
   grid-area: task;
   padding: 4px 8px;
@@ -572,4 +577,94 @@ button {
 }
 .required::placeholder {
   color: var(--secondary-red-accent);
+}
+
+/***** MEDIA QUERY ****/
+@media (max-width: 1024px) {
+  .main {
+    grid-template-columns: 22% 78%;
+  }
+  .controls {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 780px) {
+  .task-content {
+    width: 36vmin;
+  }
+  .main {
+    grid-template-columns: 25% 75%;
+  }
+}
+@media (max-width: 480px) {
+  .header {
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .main {
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav {
+    order: 2;
+    height: 15%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+  .display {
+    height: 85%;
+  }
+  .navCnt {
+    display: flex;
+    flex-direction: column;
+    padding: 0 25px;
+    align-items: center;
+  }
+  .footer {
+    height: 25px;
+    padding-top: 2px;
+  }
+  .controls > button {
+    height: 30px;
+    font-size: 16px;
+    padding: 2px 8px;
+  }
+  .expArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .mobNav {
+    height: 45%;
+  }
+  .controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 87vw;
+  }
+  .task-nav,
+  .project-nav-cnt {
+    width: 75vw;
+  }
+  .task-cnt0 {
+    padding: 5px 7px;
+  }
+  .task-span {
+    margin: 2px 10px;
+  }
+  .display {
+    padding: 15px;
+  }
+  .task-content,
+  .task-date {
+    font-size: 14px;
+  }
 }

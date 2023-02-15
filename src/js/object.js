@@ -9,7 +9,7 @@ export const object = (() =>{
     };
 
     const makeTodo = (task, date, priority) => { 
-        objects[0].obj.push(createTodo(task, date, priority))
+        objects[0].obj.push(createTodo(task, date, priority));
         console.log(objects);
         localStorage.setItem("objectInStorage",  JSON.stringify(objects));
     };
@@ -80,7 +80,6 @@ export const object = (() =>{
     } else {
     objects = JSON.parse (localStorage.getItem("objectInStorage"));
     }
-    console.log(objects);
 
     return { objects, makeTodo, removeTodo, addProjectTitle, addProjectValue, removeProjectValue, removeProject}
 
