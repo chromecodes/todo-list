@@ -665,6 +665,9 @@ button {
   }
   .task-content,
   .task-date {
-    font-size: 14px;
+    font-size: 16px;
+  }
+  .task-title {
+    font-size: 20px;
   }
 }
